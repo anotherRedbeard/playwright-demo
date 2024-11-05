@@ -31,7 +31,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'PlaywrightServiceConnection'
-    scriptType: 'ps'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "Authenticated using service connection"
