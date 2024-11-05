@@ -35,12 +35,14 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "Authenticated using service connection"
+       export PLAYWRIGHT_SERVICE_ACCESS_TOKEN=$(az account get-access-token --resource https://playwright.azure.com --query accessToken --output tsv)
 
 - task: PowerShell@2
   enabled: true
   displayName: "Run Playwright tests"
   env:
     PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(PLAYWRIGHT_SERVICE_URL)
+    PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(PLAYWRIGHT_SERVICE_ACCESS_TOKEN)
   inputs:
     targetType: 'inline'
     script: 'npx playwright test -c playwright.service.config.ts --workers=20'
