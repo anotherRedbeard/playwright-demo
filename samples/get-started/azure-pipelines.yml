@@ -28,6 +28,14 @@ steps:
     script: 'npm ci'
     workingDirectory: '$(System.DefaultWorkingDirectory)/samples/get-started'
 
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'PlaywrightServiceConnection'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "Authenticated using service connection"
+
 - task: PowerShell@2
   enabled: true
   displayName: "Run Playwright tests"
