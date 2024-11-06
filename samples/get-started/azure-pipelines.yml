@@ -43,6 +43,7 @@ steps:
   env:
     PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(TOKEN)
     PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
+    TEST_ITERATIONS: 10
   inputs:
     targetType: 'inline'
     script: 'npx playwright test -c playwright.service.config.ts --workers=20'
