@@ -43,22 +43,18 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "Authenticated using service connection"
-       export PLAYWRIGHT_SERVICE_ACCESS_TOKEN=$(az account get-access-token --resource https://playwright.azure.com --query accessToken --output tsv)
+      export PLAYWRIGHT_SERVICE_ACCESS_TOKEN=$(az account get-access-token --resource https://playwright.azure.com --query accessToken --output tsv)
 
-- task: PowerShell@2
-  enabled: true
+- script: |
+    echo "PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)"
+    echo "TEST_ITERATIONS: $(TEST_ITERATIONS)"
+    npx playwright test -c playwright.service.config.ts --workers=20
+  workingDirectory: '$(System.DefaultWorkingDirectory)/samples/get-started'
   displayName: "Run Playwright tests"
   env:
     PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(TOKEN)
     PLAYWRIGHT_SERVICE_URL: ${{ parameters.PLAYWRIGHT_SERVICE_URL }}
     TEST_ITERATIONS: ${{ parameters.MAX_ITERATIONS }}
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)"
-      echo "TEST_ITERATIONS: $(TEST_ITERATIONS)"
-      npx playwright test -c playwright.service.config.ts --workers=20
-    workingDirectory: '$(System.DefaultWorkingDirectory)/samples/get-started'
     
 - task: PublishPipelineArtifact@1
   inputs:
