@@ -50,8 +50,8 @@ steps:
   displayName: "Run Playwright tests"
   env:
     PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(TOKEN)
-    PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
-    TEST_ITERATIONS: $(MAX_ITERATIONS)
+    PLAYWRIGHT_SERVICE_URL: ${{ parameters.PLAYWRIGHT_SERVICE_URL }}
+    TEST_ITERATIONS: ${{ parameters.MAX_ITERATIONS }}
   inputs:
     targetType: 'inline'
     script: |
