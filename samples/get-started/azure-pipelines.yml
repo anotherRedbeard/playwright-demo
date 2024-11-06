@@ -46,8 +46,8 @@ steps:
       export PLAYWRIGHT_SERVICE_ACCESS_TOKEN=$(az account get-access-token --resource https://playwright.azure.com --query accessToken --output tsv)
 
 - script: |
-    echo "PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)"
-    echo "TEST_ITERATIONS: $(TEST_ITERATIONS)"
+    echo "PLAYWRIGHT_SERVICE_URL: $PLAYWRIGHT_SERVICE_URL"
+    echo "TEST_ITERATIONS: $TEST_ITERATIONS"
     npx playwright test -c playwright.service.config.ts --workers=20
   workingDirectory: '$(System.DefaultWorkingDirectory)/samples/get-started'
   displayName: "Run Playwright tests"
