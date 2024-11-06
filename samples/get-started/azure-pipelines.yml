@@ -10,10 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-  - name: PLAYWRIGHT_SERVICE_URL
+  - name: IN_PLAYWRIGHT_SERVICE_URL
     type: string
     default: 'https://playwright.azure.com'
-  - name: MAX_ITERATIONS
+  - name: IN_MAX_ITERATIONS
     type: number
     default: 10
 
@@ -47,14 +47,14 @@ steps:
 
 - script: |
     echo "PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)"
-    echo "TEST_ITERATIONS: $(MAX_ITERATIONS)"
+    echo "TEST_ITERATIONS: $(TEST_ITERATIONS)"
     npx playwright test -c playwright.service.config.ts --workers=20
   workingDirectory: '$(System.DefaultWorkingDirectory)/samples/get-started'
   displayName: "Run Playwright tests"
   env:
     PLAYWRIGHT_SERVICE_ACCESS_TOKEN: $(TOKEN)
-    PLAYWRIGHT_SERVICE_URL: ${{ parameters.PLAYWRIGHT_SERVICE_URL }}
-    TEST_ITERATIONS: ${{ parameters.MAX_ITERATIONS }}
+    PLAYWRIGHT_SERVICE_URL: ${{ parameters.IN_PLAYWRIGHT_SERVICE_URL }}
+    TEST_ITERATIONS: ${{ parameters.IN_MAX_ITERATIONS }}
     
 - task: PublishPipelineArtifact@1
   inputs:
