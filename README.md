@@ -1,3 +1,5 @@
+**This repo has been forked from the official repo located [here](https://github.com/microsoft/playwright-testing-service)**
+
 # Microsoft Playwright Testing preview
 
 Microsoft Playwright Testing is a fully managed service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously. Along with this, it enables you to publish test results and artifacts collected by Playwright to the service. This means faster test runs with broader scenario coverage, which helps speed up delivery of features without sacrificing quality.  
