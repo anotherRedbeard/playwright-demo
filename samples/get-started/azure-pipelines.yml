@@ -56,8 +56,8 @@ steps:
     PLAYWRIGHT_SERVICE_URL: ${{ parameters.IN_PLAYWRIGHT_SERVICE_URL }}
     TEST_ITERATIONS: ${{ parameters.IN_MAX_ITERATIONS }}
     
-- task: PublishPipelineArtifact@1
+- task: PublishTestResults@2
   inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/samples/get-started/playwright-report/'
-    artifact: 'Playwright tests'
-    publishLocation: 'pipeline'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'test-results/results.xml'
+  condition: always()
